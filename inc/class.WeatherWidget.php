@@ -47,9 +47,31 @@ class WeatherWidget extends WP_Widget {
 		$current_weather = owm_get_current_weather($city, $country);
 
 		// display weather conditions for specified city and country
-		echo "<strong>Temperature:</strong> " . $current_weather['temperature'] . "&deg; C<br>";
-		echo "<strong>Humidity:</strong> " . $current_weather['humidity'] . "%<br>";
-		echo "<strong>Conditions:</strong> " . $current_weather['conditions'] . "<br>";
+		?>
+			<div class="current-weather">
+				<div class="weather-conditions">
+					<?php
+						foreach ($current_weather['conditions'] as $condition) {
+							?>
+								<img
+									src="http://openweathermap.org/img/w/<?php echo $condition->icon; ?>.png"
+									title="<?php echo $condition->description; ?>"
+									alt="<?php echo $condition->main; ?>"
+								>
+							<?php
+						}
+					?>
+				</div>
+
+				<dl>
+					<dt>Temperature</dt>
+					<dd><?php echo $current_weather['temperature']; ?>&deg; C</dd>
+
+					<dt>Humidity</dt>
+					<dd><?php echo $current_weather['humidity']; ?>%</dd>
+				</dl>
+			</div>
+		<?php
 
 		// close widget
 		echo $after_widget;
