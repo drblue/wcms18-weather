@@ -5,13 +5,15 @@
 
 })(jQuery);
 
-function w18ww_get_current_weather(widget_id) {
+function w18ww_get_current_weather(widget_id, widget_city, widget_country) {
 	// fire some async request
-	console.log("Firing away request for widget " + widget_id);
+	console.log("Firing away request for current weather in " + widget_city + ", " + widget_country + " for widget " + widget_id);
 
 	var url = wcms18_weather_settings.ajax_url,
 		payload = {
 			action: 'get_current_weather',
+			city: widget_city,
+			country: widget_country,
 		};
 
 	jQuery.post(

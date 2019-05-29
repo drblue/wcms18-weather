@@ -51,7 +51,11 @@ class WeatherWidget extends WP_Widget {
 
 			<script>
 				jQuery(document).ready(function(){
-					w18ww_get_current_weather('<?php echo $widget_id; ?>');
+					w18ww_get_current_weather(
+						'<?php echo $widget_id; ?>',  // widget_id
+						'<?php echo $city; ?>',       // widget_city
+						'<?php echo $country; ?>'     // widget_country
+					);
 				});
 			</script>
 		<?php

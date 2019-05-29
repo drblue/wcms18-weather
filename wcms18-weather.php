@@ -34,7 +34,8 @@ add_action('wp_enqueue_scripts', 'w18ww_enqueue_styles');
  * Respond to AJAX request for 'get_current_weather'
  */
 function w18ww_ajax_get_current_weather() {
-	$current_weather = owm_get_current_weather('Lund', 'SE');
+
+	$current_weather = owm_get_current_weather($_POST['city'], $_POST['country']);
 
 	wp_send_json($current_weather);
 }
