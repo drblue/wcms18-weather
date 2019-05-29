@@ -48,6 +48,12 @@ class WeatherWidget extends WP_Widget {
 			<div class="current-weather">
 				<em><small>Loading...</small></em>
 			</div>
+
+			<script>
+				jQuery(document).ready(function(){
+					w18ww_get_current_weather('<?php echo $widget_id; ?>');
+				});
+			</script>
 		<?php
 
 		// close widget
