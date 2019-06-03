@@ -32,10 +32,3 @@
 	});
 
 })(jQuery);
-
-function w18ww_get_current_weather(widget_id, widget_city, widget_country) {
-	// fire some async request
-	console.log("Firing away request for current weather in " + widget_city + ", " + widget_country + " for widget " + widget_id);
-
-
-}
