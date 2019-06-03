@@ -11,7 +11,10 @@ function owm_get_current_weather($city, $country) {
 
 	// 2. Make sure we get a valid response
 	if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
-		return false;
+		return [
+			'success' => false,
+			'error' => wp_remote_retrieve_response_code($response), // 404
+		];
 	}
 
 	// 3. Parse response
@@ -26,5 +29,8 @@ function owm_get_current_weather($city, $country) {
 	$current_weather['conditions'] = $data->weather;
 
 	// 5. Return picked data to caller.
-	return $current_weather;
+	return [
+		'success' => true,
+		'data' => $current_weather,
+	];
 }

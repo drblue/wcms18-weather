@@ -12,22 +12,44 @@
 					action: 'get_current_weather',
 					city: widget_city,
 					country: widget_country,
-				}, // Data to send to server
-				function(data) {
-					var output = "";
-					console.log("Got response", data);
+				} // Data to send to server
+
+			)
+			.done(function(response) {
+				var output = "";
+				console.log("Got response", response);
+
+				if (response.success) {
+					console.log("Got successful response");
+					var weather = response.data;
 
 					output += '<div class="conditions">';
-					data.conditions.forEach(function(condition) {    // foreach ($data->conditions as $condition)
+					weather.conditions.forEach(function(condition) {    // foreach ($weather->conditions as $condition)
 						output += '<img src="http://openweathermap.org/img/w/'+condition.icon+'.png" alt="'+condition.main+'" title="'+condition.description+'">';
 					});
 					output += '</div>';
 
-					output += '<strong>Temperature:</strong> ' + data.temperature + '&deg; C<br>';
-					output += '<strong>Humidity:</strong> ' + data.humidity + '%<br>';
-					$(current_weather).html(output);
+					output += '<strong>Temperature:</strong> ' + weather.temperature + '&deg; C<br>';
+					output += '<strong>Humidity:</strong> ' + weather.humidity + '%<br>';
+				} else {
+					console.log("Got UNSUCCESSFUL response");
+					if (response.data == 404) {
+						output += "Could not find current weather for city.";
+					} else {
+						output += "Something went wrong, please try again 😅.";
+					}
 				}
-			);
+				console.log("OUTPUT will be", output);
+				$(current_weather).html(output);
+			})
+			.fail(function(error) {
+				var output = "Unknown error";
+				if (error.status == 404) {
+					output = "Could not find weather server.";
+				}
+				$(current_weather).html(output);
+			});
+
 		});
 	});
 
