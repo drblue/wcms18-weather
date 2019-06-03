@@ -45,19 +45,21 @@ class WeatherWidget extends WP_Widget {
 
 		// display loading spinner
 		?>
-			<div class="current-weather">
+			<div class="current-weather" data-city="<?php echo $city; ?>" data-country="<?php echo $country; ?>">
 				<em><small>Loading...</small></em>
 			</div>
 
+			<!--
 			<script>
 				jQuery(document).ready(function(){
 					w18ww_get_current_weather(
-						'<?php echo $widget_id; ?>',  // widget_id
-						'<?php echo $city; ?>',       // widget_city
-						'<?php echo $country; ?>'     // widget_country
+						'<?php //echo $widget_id; ?>',  // widget_id
+						'<?php //echo $city; ?>',       // widget_city
+						'<?php //echo $country; ?>'     // widget_country
 					);
 				});
 			</script>
+			-->
 		<?php
 
 		// close widget
