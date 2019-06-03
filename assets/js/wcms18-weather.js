@@ -17,10 +17,8 @@
 			)
 			.done(function(response) {
 				var output = "";
-				console.log("Got response", response);
 
 				if (response.success) {
-					console.log("Got successful response");
 					var weather = response.data;
 
 					output += '<div class="conditions">';
@@ -32,14 +30,13 @@
 					output += '<strong>Temperature:</strong> ' + weather.temperature + '&deg; C<br>';
 					output += '<strong>Humidity:</strong> ' + weather.humidity + '%<br>';
 				} else {
-					console.log("Got UNSUCCESSFUL response");
 					if (response.data == 404) {
 						output += "Could not find current weather for city.";
 					} else {
 						output += "Something went wrong, please try again 😅.";
 					}
 				}
-				console.log("OUTPUT will be", output);
+
 				$(current_weather).html(output);
 			})
 			.fail(function(error) {
